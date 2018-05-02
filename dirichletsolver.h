@@ -22,6 +22,23 @@ class DirichletSolver
   private:
     DenseMatrix<T_returnType> m_matrix;
     MyVector<T_returnType> m_vector;
+    int m_numDivisions;
+    MyFunction<T_returnType,T_functionPtr> m_func; 
+
+    /*! Creates the matrix from the bondary function and the number of divisions.
+     * \pre None.
+     * \post The m_matrix is updated.
+     * \return Void.
+     */
+    void createMatrix();
+
+    /*! Creates the vector from the bondary function and the number of divisions.
+     * \pre None.
+     * \post The m_vector is updated.
+     * \return Void.
+     */
+    void createVector();
+
   public:
     /*! Constructor.
      * \pre None.
