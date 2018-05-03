@@ -38,11 +38,8 @@ int main(int argc, char *argv[])
       throw FileNotFoundException();
     }
     //todo
-    DenseMatrix<double> A(10);
-    MyVector<double> b(10);
-    cin>>A;
-    cin>>b;
-    cout<<GaussSeidel<double>()(A,b);
+    double (*funcPtr)(double) = func1;
+    //cout<<DirichletSolver<double,>()(A,b);
   }
   catch(ErrorSizeException e)
   {
