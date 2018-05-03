@@ -101,6 +101,5 @@ void DirichletSolver<T_returnType,T_functionPtr>::createVector()
     if(t)
       m_vector[i]+=h*m_func(x,y+h);
   }
-  cout<<"\n\nYou already know:\n\n"<<m_vector<<endl;
   return;
 }

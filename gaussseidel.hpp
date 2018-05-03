@@ -24,10 +24,11 @@ MyVector<T> GaussSeidel<T>::operator()(const MatrixBase<T>& m, const MyVector<T>
     throw SolutionUndefinedException();
   if(m.isIdentity())
     return v;
-  int n=100; //number of iterations
   MyVector<T> x(v);
   MyVector<T> y(v);
-  while(n>0) //convert this to error checking later
+  MyVector<T> oldX(x);
+  int count=10000;
+  do
   {
     for(int i=0;i<m.getSize();i++)
     {
@@ -40,10 +41,7 @@ MyVector<T> GaussSeidel<T>::operator()(const MatrixBase<T>& m, const MyVector<T>
         x[i]=y[i];
       }
     }
-    n--;
-  }
+    count--;
+  }while((oldX-x).dotProduct(oldX-x)>pow(.1,2)&&count);
   return x;
-
-
-  //https://www.sanfoundry.com/cpp-program-implement-gauss-seidel-method/
 }

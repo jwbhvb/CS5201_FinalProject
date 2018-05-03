@@ -12,11 +12,9 @@
 #include "SymmetricMatrix.h"
 #include "AbsoluteError.h"
 #include "RelativeError.h"
-#include "FileNotFoundException.h"
 #include "GaussSeidel.h"
 #include "SteepestDescent.h"
 #include "DirichletSolver.h"
-
 
 //todo document
 double func1(double x, double y);
@@ -30,25 +28,31 @@ int main(int argc, char *argv[])
   {
     if(argc!=2)
     {
-      cerr<<"Please use the following command: '"<<argv[0]<<" filename'"<<endl;
-      exit(1);  
+      cerr<<"Please use the following command: '"<<argv[0]<<" int'"<<endl;
+      exit(1);
     }
-    ifstream inFile(argv[1]);
-    if(!inFile.is_open())
+    int numDivisions=stoi(argv[1]);
+    if(numDivisions<1)
     {
-      throw FileNotFoundException();
+      cerr<<"Enter a number of divisions greater than 0."<<endl;
+      exit(1);
     }
-    //todo
-
     MyFunction<double,funcPtr> boundaryFunc(&func1);
-    DirichletSolver<double,funcPtr> solver(4,boundaryFunc);
+    DirichletSolver<double,funcPtr> solver(numDivisions,boundaryFunc);
+    MyVector<double> solutionGaussSeidel = solver.computeGaussSeidel();
+
+    for(int i=0;i<numDivisions-1;i++)
+    {
+      for(int j=0;j<numDivisions-1;j++)
+      {
+        cout<<fixed<<setprecision(DIGITS_OF_PRECISION)<<solutionGaussSeidel[numDivisions-1*i+j]<<" ";
+      }
+      cout<<"\n";
+    }
+
+    //MyVector<double> solutionSteepestDescent = solver.computeSteepestDescent();
   }
   catch(ErrorSizeException e)
-  {
-    cerr<<e<<endl;
-    exit(1);
-  }
-  catch(FileNotFoundException e)
   {
     cerr<<e<<endl;
     exit(1);
