@@ -43,7 +43,7 @@ void DirichletSolver<T_returnType,T_functionPtr>::createMatrix()
 template <class T_returnType, class T_functionPtr>
 void DirichletSolver<T_returnType,T_functionPtr>::createVector()
 {
-  m_vector.setSize(pow(m_numDivisions-1,2));
+  m_vector.setSize((m_numDivisions-1) * (m_numDivisions-1));
   double h=1.0/m_numDivisions;
   double x=0;
   double y=0;

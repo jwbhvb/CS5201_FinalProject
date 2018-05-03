@@ -19,7 +19,8 @@
 
 
 //todo document
-double func1(const double& x, const double& y);
+double func1(double x, double y);
+typedef double(*funcPtr)(double,double);
 
 using namespace std;
 
@@ -38,8 +39,9 @@ int main(int argc, char *argv[])
       throw FileNotFoundException();
     }
     //todo
-    double (*funcPtr)(double) = func1;
-    //cout<<DirichletSolver<double,>()(A,b);
+
+    MyFunction<double,funcPtr> boundaryFunc(&func1);
+    DirichletSolver<double,funcPtr> solver(4,boundaryFunc);
   }
   catch(ErrorSizeException e)
   {
@@ -79,7 +81,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-double func1(const double& x, const double& y)
+double func1(double x, double y)
 {
   return(y?0:1-4*(pow(x-.5,2)));
 }

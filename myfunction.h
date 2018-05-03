@@ -20,6 +20,13 @@ class MyFunction
   public:
     /*! Constructor.
      * \pre None.
+     * \post Creates a MyFunction object.
+     * \return None.
+     */
+    MyFunction() {}
+
+    /*! Constructor.
+     * \pre None.
      * \post Creates a MyFunction object with m_func pointing to the function that 'f' is pointing to.
      * \return None.
      */
