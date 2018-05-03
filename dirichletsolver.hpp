@@ -23,66 +23,57 @@ DirichletSolver<T_returnType,T_functionPtr>::DirichletSolver(const int& n, const
 template <class T_returnType, class T_functionPtr>
 MyVector<T_returnType> DirichletSolver<T_returnType,T_functionPtr>::computeGaussSeidel()
 {
-  return GaussSeidel<T_returnType>()(m_matrix,m_vector);
+  return GaussSeidel<T_returnType>()(*m_matrix,m_vector);
 }
 
 template <class T_returnType, class T_functionPtr>
 MyVector<T_returnType> DirichletSolver<T_returnType,T_functionPtr>::computeSteepestDescent()
 {
-  return SteepestDescent<T_returnType>()(m_matrix,m_vector);
+  return SteepestDescent<T_returnType>()(*m_matrix,m_vector);
 }
 
 
 template <class T_returnType, class T_functionPtr>
 void DirichletSolver<T_returnType,T_functionPtr>::createMatrix()
 {
-  int matrix_size = (m_numDivisions-1) * (m_numDivisions-1);
-  SymmetricMatrix<double> m_matrix(matrix_size);
-  
+  m_matrix=new SymmetricMatrix<T_returnType>((m_numDivisions-1)*(m_numDivisions-1));
   double h = 1.0/m_numDivisions;
-
-  double x_vals = 0;
-  double y_vals = 0;
-
+  double x = 0;
+  double y = 0;
   bool r, t;
 
-
-  for (int i=0; i<matrix_size; i++)
+  for (int i=0; i<m_matrix->getSize(); i++)
   {
-    x_vals += h;
+    x += h;
 
-    if (i%(m_numDivisions-1) == 0)
+    if (!(i%(m_numDivisions-1)))
     {
-      y_vals += h;
-      x_vals = h;
+      y += h;
+      x = h;
     }
     
     r = (m_numDivisions-2 != i%(m_numDivisions-1));
-    t = (i != matrix_size - 1);
+    t = (i != m_matrix->getSize() - 1);
 
-    for (int j=r; j<matrix_size; j++)
+    for (int j=i; j<m_matrix->getSize(); j++)
     {
       if (j == (i+(m_numDivisions-1)) && t)
-        m_matrix(i,j) = -h;
+        m_matrix->operator()(i,j)=-h;
       else if (j == (i+1) && r)
-        m_matrix(i,j) = -h;
+        m_matrix->operator()(i,j) = -h;
       else if (i == j)
-        m_matrix(i,j) = 1;
+        m_matrix->operator()(i,j) = 1;
       else
-        m_matrix(i,j) = 0;
+        m_matrix->operator()(i,j) = 0;
     }
-
   }
-  //cout << "made it to end of createMatrix();" << endl;
-  cout << m_matrix << endl;
-
   return;
 }
 
 template <class T_returnType, class T_functionPtr>
 void DirichletSolver<T_returnType,T_functionPtr>::createVector()
 {
-  m_vector.setSize((m_numDivisions-1) * (m_numDivisions-1));
+  m_vector.setSize((m_numDivisions-1)*(m_numDivisions-1));
   double h=1.0/m_numDivisions;
   double x=0;
   double y=0;

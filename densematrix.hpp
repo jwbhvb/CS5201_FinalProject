@@ -31,7 +31,7 @@ MatrixBase<T>& DenseMatrix<T>::operator-(const MatrixBase<T>& other) const
 {
   if(getSize()!=other.getSize())
   {
-    throw "Matrix subtration size error.";
+    throw "Matrix subtraction size error.";
   }
   MatrixBase<T>* ret = new DenseMatrix<T>(getSize());
   for(int i=0;i<getSize();i++)

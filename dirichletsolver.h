@@ -20,7 +20,7 @@ template <class T_returnType, class T_functionPtr>
 class DirichletSolver
 {
   private:
-    DenseMatrix<T_returnType> m_matrix;
+    MatrixBase<T_returnType>* m_matrix;
     MyVector<T_returnType> m_vector;
     int m_numDivisions;
     MyFunction<T_returnType,T_functionPtr> m_func; 
