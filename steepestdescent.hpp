@@ -26,7 +26,6 @@ MyVector<T> SteepestDescent<T>::operator()(const MatrixBase<T>& m, const MyVecto
     throw "Matrix must be symmetric and diagonally dominant.";
   if(m.isIdentity())
     return v;
-  int count=100000;
   MyVector<T> currentGuess(v.getSize());
   for(int i=0;i<v.getSize();i++)
   {
@@ -39,8 +38,7 @@ MyVector<T> SteepestDescent<T>::operator()(const MatrixBase<T>& m, const MyVecto
     previousGuess=currentGuess;
     r=v-(m*currentGuess);
     auto alpha=(r.dotProduct(r))/((m*r).dotProduct(r));
-    currentGuess+= r * alpha;
-    count--;
-  } while((r).dotProduct(r)>pow(0.1,25)&&count);
+    currentGuess+=r*alpha;
+  } while((previousGuess-currentGuess).dotProduct(previousGuess-currentGuess)>pow(0.1,25));
   return currentGuess;
 }

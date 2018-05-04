@@ -39,18 +39,28 @@ int main(int argc, char *argv[])
     }
     MyFunction<double,funcPtr> boundaryFunc(&func1);
     DirichletSolver<double,funcPtr> solver(numDivisions,boundaryFunc);
+    
     MyVector<double> solutionGaussSeidel = solver.computeGaussSeidel();
 
-    for(int i=0;i<numDivisions-1;i++)
+    for(int i=numDivisions-1;i>0;i--) //both these neex to be rewritten to form the inner points of the dirichlet problem
     {
       for(int j=0;j<numDivisions-1;j++)
       {
-        cout<<fixed<<setprecision(DIGITS_OF_PRECISION)<<solutionGaussSeidel[numDivisions-1*i+j]<<" ";
+        cout<<fixed<<setprecision(DIGITS_OF_PRECISION)<<solutionGaussSeidel[(numDivisions-1)*i+j]<<" ";
       }
       cout<<"\n";
     }
+    cout<<endl;
 
-    //MyVector<double> solutionSteepestDescent = solver.computeSteepestDescent();
+    MyVector<double> solutionSteepestDescent = solver.computeSteepestDescent();
+    for(int i=0;i<numDivisions-1;i++) //both these neex to be rewritten to form the inner points of the dirichlet problem
+    {
+      for(int j=0;j<numDivisions-1;j++)
+      {
+        cout<<fixed<<setprecision(DIGITS_OF_PRECISION)<<solutionSteepestDescent[(numDivisions-1)*i+j]<<" ";
+      }
+      cout<<"\n";
+    }
   }
   catch(ErrorSizeException e)
   {

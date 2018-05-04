@@ -21,7 +21,7 @@
 
 using namespace std;
 
-const int DIGITS_OF_PRECISION = 4;
+const int DIGITS_OF_PRECISION = 8;
 
 template <class T>
 class MyVector
