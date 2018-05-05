@@ -1,5 +1,5 @@
 //Programmer: John Bagsby, Ryan Leas
-//Date: 4/29/18
+//Date: 5/5/18
 //File: gaussseidel.hpp
 
 /*! \file

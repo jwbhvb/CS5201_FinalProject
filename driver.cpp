@@ -1,5 +1,5 @@
 //Programmer: John Bagsby, Ryan Leas
-//Date: 4/29/18
+//Date: 5/5/18
 //File: driver.cpp
 
 /*! \file
@@ -10,8 +10,6 @@
 #include "MyFunction.h"
 #include "DenseMatrix.h"
 #include "SymmetricMatrix.h"
-#include "GaussSeidel.h"
-#include "SteepestDescent.h"
 #include "DirichletSolver.h"
 
 double func1(double x, double y);

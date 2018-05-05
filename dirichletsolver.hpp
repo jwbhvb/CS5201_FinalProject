@@ -1,5 +1,5 @@
 //Programmer: John Bagsby, Ryan Leas
-//Date: 4/29/18
+//Date: 5/5/18
 //File: dirichletsolver.hpp
 
 /*! \file
@@ -18,8 +18,6 @@ DirichletSolver<T_returnType,T_functionPtr>::DirichletSolver(const int& n, const
   m_func=f;
   createMatrix();
   createVector();
-  //cout<<"A Matrix:\n"<<*m_matrix<<endl;
-  //cout<<"B vector:\n"<<m_vector<<endl<<endl;
 }
 
 template <class T_returnType, class T_functionPtr>
