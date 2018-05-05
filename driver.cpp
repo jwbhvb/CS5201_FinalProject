@@ -11,6 +11,7 @@
 #include "DenseMatrix.h"
 #include "SymmetricMatrix.h"
 #include "DirichletSolver.h"
+#include <time.h>
 
 double func1(double x, double y);
 typedef double(*funcPtr)(double,double);
@@ -32,11 +33,17 @@ int main(int argc, char *argv[])
       cerr<<"Enter a number of divisions greater than 0."<<endl;
       exit(1);
     }
+    clock_t my_clock;
+    clock_t my_clock2;
     MyFunction<double,funcPtr> boundaryFunc(&func1);
     DirichletSolver<double,funcPtr> solver(numDivisions,boundaryFunc);
 
+
+
     /*------------------------------Gauss Seidel------------------------------*/
+    my_clock=clock();
     MyVector<double> solutionGaussSeidel = solver.computeGaussSeidel();
+    my_clock=clock()-my_clock;
     cout<<"\nGauss-Seidel Solution:\n";
     for(int i=numDivisions-1;i>0;i--)
     {
@@ -46,11 +53,17 @@ int main(int argc, char *argv[])
       }
       cout<<"\n";
     }
-    cout<<"\nNumber of Iterations: "<<solver.getGaussSeidelSolver().getCount()<<endl;
+    cout<<"\nNumber of Iterations: "<<solver.getGaussSeidelSolver().getCount();
+    cout<<"\nTime took: "<<(1000*my_clock)/CLOCKS_PER_SEC<<" ms."<<endl;
+    /*----------------------------End Gauss Seidel----------------------------*/
+
+
 
     /*----------------------------Steepest Descent----------------------------*/
     cout<<"\nSteepest Descent Solution:\n";
+    my_clock2=clock();
     MyVector<double> solutionSteepestDescent = solver.computeSteepestDescent();
+    my_clock2=clock()-my_clock2;
     for(int i=numDivisions-1;i>0;i--)
     {
       for(int j=0;j<numDivisions-1;j++)
@@ -59,7 +72,11 @@ int main(int argc, char *argv[])
       }
       cout<<"\n";
     }
-    cout<<"\nNumber of Iterations: "<<solver.getSteepestDescentSolver().getCount()<<endl;
+    cout<<"\nNumber of Iterations: "<<solver.getSteepestDescentSolver().getCount();
+    cout<<"\nTime took: "<<(1000*my_clock2)/CLOCKS_PER_SEC<<" ms."<<endl;
+    /*--------------------------End Steepest Descent--------------------------*/
+
+
 
   }
   catch(MyVectorIndexException e)

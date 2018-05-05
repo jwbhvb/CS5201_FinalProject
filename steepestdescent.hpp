@@ -27,10 +27,6 @@ MyVector<T> SteepestDescent<T>::operator()(const MatrixBase<T>& m, const MyVecto
   if(m.isIdentity())
     return v;
   MyVector<T> currentGuess(v);
-  for(int i=0;i<v.getSize();i++)
-  {
-    currentGuess[i]=i;
-  }
   MyVector<T> previousGuess(v);
   MyVector<T> r;
   m_iterations=0;
