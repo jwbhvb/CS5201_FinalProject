@@ -160,7 +160,7 @@ MyVector<T>& SymmetricMatrix<T>::operator*(const MyVector<T>& other) const
     T tmp=0;
     for(int j=0;j<getSize();j++)
     {
-      tmp+=operator()(i,j)*other[i];
+      tmp+=operator()(i,j)*other[j];
     }
     ret->operator[](i)=tmp;
   }

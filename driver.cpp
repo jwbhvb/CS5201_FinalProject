@@ -4,7 +4,7 @@
 
 /*! \file
  *
- * todo.
+ * The purpose of this file is to solve a system of equations created by the DirichletSolver.
  */
 
 #include "MyFunction.h"
@@ -16,7 +16,6 @@
 #include "SteepestDescent.h"
 #include "DirichletSolver.h"
 
-//todo document
 double func1(double x, double y);
 typedef double(*funcPtr)(double,double);
 

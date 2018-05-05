@@ -82,7 +82,12 @@ class MatrixBase
       }
       for(int i=0;i<getSize();i++)
       {
-        ret->operator[](i)=operator[](i).dotProduct(other);
+        T tmp=0;
+        for(int j=0;j<getSize();j++)
+        {
+          tmp+=operator()(i,j)*other[j];
+        }
+        ret->operator[](i)=tmp;
       }
       return *ret;
     }

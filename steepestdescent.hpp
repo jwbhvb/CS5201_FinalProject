@@ -37,8 +37,8 @@ MyVector<T> SteepestDescent<T>::operator()(const MatrixBase<T>& m, const MyVecto
   {
     previousGuess=currentGuess;
     r=v-(m*currentGuess);
-    auto alpha=(r.dotProduct(r))/((m*r).dotProduct(r));
+    T alpha=(r.dotProduct(r))/((m*r).dotProduct(r));
     currentGuess+=r*alpha;
-  } while(r.dotProduct(r)>pow(0.1,25));
+  } while((previousGuess-currentGuess).dotProduct((previousGuess-currentGuess))>pow(0.1,25));
   return currentGuess;
 }
