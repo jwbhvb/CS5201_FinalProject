@@ -33,12 +33,14 @@ MyVector<T> SteepestDescent<T>::operator()(const MatrixBase<T>& m, const MyVecto
   }
   MyVector<T> previousGuess(v.getSize());
   MyVector<T> r;
+  m_iterations=0;
   do
   {
+    m_iterations++;
     previousGuess=currentGuess;
     r=v-(m*currentGuess);
     T alpha=(r.dotProduct(r))/((m*r).dotProduct(r));
     currentGuess+=r*alpha;
-  } while((previousGuess-currentGuess).dotProduct((previousGuess-currentGuess))>pow(0.1,25));
+  } while((previousGuess-currentGuess).dotProduct((previousGuess-currentGuess))>pow(0.1,20)&&m_iterations<10000);
   return currentGuess;
 }

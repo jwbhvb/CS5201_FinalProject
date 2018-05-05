@@ -10,8 +10,6 @@
 #include "MyFunction.h"
 #include "DenseMatrix.h"
 #include "SymmetricMatrix.h"
-#include "AbsoluteError.h"
-#include "RelativeError.h"
 #include "GaussSeidel.h"
 #include "SteepestDescent.h"
 #include "DirichletSolver.h"
@@ -38,7 +36,8 @@ int main(int argc, char *argv[])
     }
     MyFunction<double,funcPtr> boundaryFunc(&func1);
     DirichletSolver<double,funcPtr> solver(numDivisions,boundaryFunc);
-    
+
+    /*------------------------------Gauss Seidel------------------------------*/
     MyVector<double> solutionGaussSeidel = solver.computeGaussSeidel();
     cout<<"\nGauss-Seidel Solution:\n";
     for(int i=numDivisions-1;i>0;i--)
@@ -50,6 +49,7 @@ int main(int argc, char *argv[])
       cout<<"\n";
     }
 
+    /*----------------------------Steepest Descent----------------------------*/
     cout<<"\nSteepest Descent Solution:\n";
     MyVector<double> solutionSteepestDescent = solver.computeSteepestDescent();
     for(int i=numDivisions-1;i>0;i--)
@@ -60,11 +60,6 @@ int main(int argc, char *argv[])
       }
       cout<<"\n";
     }
-  }
-  catch(ErrorSizeException e)
-  {
-    cerr<<e<<endl;
-    exit(1);
   }
   catch(MyVectorIndexException e)
   {

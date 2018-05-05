@@ -27,8 +27,10 @@ MyVector<T> GaussSeidel<T>::operator()(const MatrixBase<T>& m, const MyVector<T>
   MyVector<T> x(v);
   MyVector<T> y(v);
   MyVector<T> oldX(x);
+  m_iterations=0;
   do
   {
+    m_iterations++;
     oldX=x;
     for(int i=0;i<m.getSize();i++)
     {
@@ -41,6 +43,6 @@ MyVector<T> GaussSeidel<T>::operator()(const MatrixBase<T>& m, const MyVector<T>
         x[i]=y[i];
       }
     }
-  }while((oldX-x).dotProduct(oldX-x)>pow(.1,25));
+  }while((oldX-x).dotProduct(oldX-x)>pow(.1,20)&&m_iterations<10000);
   return x;
 }

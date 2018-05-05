@@ -24,6 +24,8 @@ class DirichletSolver
     MyVector<T_returnType> m_vector;
     int m_numDivisions;
     MyFunction<T_returnType,T_functionPtr> m_func; 
+    GaussSeidel<T_returnType>* m_solverGaussSeidel;
+    SteepestDescent<T_returnType>* m_solverSteepestDescent;
 
     /*! Creates the matrix from the bondary function and the number of divisions.
      * \pre None.

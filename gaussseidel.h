@@ -19,6 +19,7 @@ template <class T>
 class GaussSeidel
 {
   private:
+    int m_iterations;
   public:
     /*! Constructor.
      * \pre None.
@@ -34,6 +35,13 @@ class GaussSeidel
      * \throws SolutionUndefinedException
      */
     MyVector<T> operator()(const MatrixBase<T>& m, const MyVector<T>& v);
+
+    /*! Count getter.
+     * \pre The function evaluator needs to be called before grabbing this value.
+     * \post Returns the m_iterations.
+     * \return Int.
+     */
+    const int& getCount(){return m_iterations;}
 };
 
 #include "gaussseidel.hpp"

@@ -25,13 +25,15 @@ DirichletSolver<T_returnType,T_functionPtr>::DirichletSolver(const int& n, const
 template <class T_returnType, class T_functionPtr>
 MyVector<T_returnType> DirichletSolver<T_returnType,T_functionPtr>::computeGaussSeidel()
 {
-  return GaussSeidel<T_returnType>()(*m_matrix,m_vector);
+  m_solverGaussSeidel=new GaussSeidel<T_returnType>();
+  return m_solverGaussSeidel->operator()(*m_matrix,m_vector);
 }
 
 template <class T_returnType, class T_functionPtr>
 MyVector<T_returnType> DirichletSolver<T_returnType,T_functionPtr>::computeSteepestDescent()
 {
-  return SteepestDescent<T_returnType>()(*m_matrix,m_vector);
+  m_solverSteepestDescent=new SteepestDescent<T_returnType>();
+  return m_solverSteepestDescent->operator()(*m_matrix,m_vector);
 }
 
 
