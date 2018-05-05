@@ -18,8 +18,8 @@ DirichletSolver<T_returnType,T_functionPtr>::DirichletSolver(const int& n, const
   m_func=f;
   createMatrix();
   createVector();
-  cout<<"A Matrix:\n"<<*m_matrix<<endl;
-  cout<<"B vector:\n"<<m_vector<<endl<<endl;
+  //cout<<"A Matrix:\n"<<*m_matrix<<endl;
+  //cout<<"B vector:\n"<<m_vector<<endl<<endl;
 }
 
 template <class T_returnType, class T_functionPtr>
