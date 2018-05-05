@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
       }
       cout<<"\n";
     }
+    cout<<"\nNumber of Iterations: "<<solver.getGaussSeidelSolver().getCount()<<endl;
 
     /*----------------------------Steepest Descent----------------------------*/
     cout<<"\nSteepest Descent Solution:\n";
@@ -60,6 +61,8 @@ int main(int argc, char *argv[])
       }
       cout<<"\n";
     }
+    cout<<"\nNumber of Iterations: "<<solver.getSteepestDescentSolver().getCount()<<endl;
+
   }
   catch(MyVectorIndexException e)
   {

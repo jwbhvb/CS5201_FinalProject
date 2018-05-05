@@ -26,12 +26,12 @@ MyVector<T> SteepestDescent<T>::operator()(const MatrixBase<T>& m, const MyVecto
     throw "Matrix must be symmetric and diagonally dominant.";
   if(m.isIdentity())
     return v;
-  MyVector<T> currentGuess(v.getSize());
+  MyVector<T> currentGuess(v);
   for(int i=0;i<v.getSize();i++)
   {
     currentGuess[i]=i;
   }
-  MyVector<T> previousGuess(v.getSize());
+  MyVector<T> previousGuess(v);
   MyVector<T> r;
   m_iterations=0;
   do

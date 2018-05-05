@@ -62,6 +62,20 @@ class DirichletSolver
      * \return MyVector<T_returnType>.
      */
     MyVector<T_returnType> computeSteepestDescent();
+
+    /*! Solver getter.
+     * \pre None.
+     * \post Gets m_solverGaussSeidel.
+     * \return GaussSeidel<T_returnType>.
+     */
+    const GaussSeidel<T_returnType>& getGaussSeidelSolver() const {return *m_solverGaussSeidel;}
+
+    /*! Solver getter.
+     * \pre None.
+     * \post Gets m_solverSteepestDescent.
+     * \return SteepestDescent<T_returnType>.
+     */
+    const SteepestDescent<T_returnType>& getSteepestDescentSolver() const {return *m_solverSteepestDescent;}
 };
 
 #include "dirichletsolver.hpp"

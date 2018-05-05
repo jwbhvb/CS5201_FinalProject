@@ -41,7 +41,7 @@ class SteepestDescent
      * \post Returns the m_iterations.
      * \return Int.
      */
-    const int& getCount(){return m_iterations;}
+    const int& getCount() const {return m_iterations;}
 };
 
 #include "steepestdescent.hpp"
