@@ -68,13 +68,13 @@ const T& DenseMatrix<T>::operator()(const int& i, const int& j) const
 }
 
 template <class T>
-MyVector<T>& DenseMatrix<T>::operator[](const int& row)
+MyVector<T> DenseMatrix<T>::operator[](const int& row)
 {
   return m_data[row];
 }
 
 template <class T>
-const MyVector<T>& DenseMatrix<T>::operator[](const int& row) const
+const MyVector<T> DenseMatrix<T>::operator[](const int& row) const
 {
   return m_data[row];
 }
@@ -143,13 +143,13 @@ bool DenseMatrix<T>::isDiagonallyDominant() const
 }
 
 template <class T>
-MyVector<T>& DenseMatrix<T>::operator*(const MyVector<T>& other) const
+MyVector<T> DenseMatrix<T>::operator*(const MyVector<T>& other) const
 {
-  MyVector<T>* ret = new MyVector<T>(getSize());
   if(getSize()!=other.getSize())
   {
     throw MyVectorSizeException();
   }
+  MyVector<T> ret(other.getSize());
   for(int i=0;i<getSize();i++)
   {
     T tmp=0;
@@ -157,9 +157,9 @@ MyVector<T>& DenseMatrix<T>::operator*(const MyVector<T>& other) const
     {
       tmp+=m_data[i][j]*other[j];
     }
-    ret->operator[](i)=tmp;
+    ret[i]=tmp;
   }
-  return *ret;
+  return ret;
 }
 
 template <class T>

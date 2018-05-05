@@ -49,6 +49,13 @@ class DirichletSolver
      */
     DirichletSolver(const int& n, const MyFunction<T_returnType,T_functionPtr>& f);
 
+    /*! Destructor.
+     * \pre None.
+     * \post Deletes the matrix.
+     * \return None.
+     */
+    ~DirichletSolver(){delete m_matrix;delete m_solverGaussSeidel;delete m_solverSteepestDescent;}
+
     /*! Solves the system of equations using the Gauss Seidel method.
      * \pre None.
      * \post Computes the solution to the system of equations.

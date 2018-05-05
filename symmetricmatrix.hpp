@@ -71,25 +71,25 @@ const T& SymmetricMatrix<T>::operator()(const int& i, const int& j) const
 }
 
 template <class T>
-MyVector<T>& SymmetricMatrix<T>::operator[](const int& row)
+MyVector<T> SymmetricMatrix<T>::operator[](const int& row)
 {
-  MyVector<T>* ret = new MyVector<T>(getSize());
+  MyVector<T> ret(getSize());
   for(int i=0;i<getSize();i++)
   {
-    ret->operator[](i)=operator()(row,i);
+    ret[i]=operator()(row,i);
   }
-  return *ret;
+  return ret;
 }
 
 template <class T>
-const MyVector<T>& SymmetricMatrix<T>::operator[](const int& row) const
+const MyVector<T> SymmetricMatrix<T>::operator[](const int& row) const
 {
-  MyVector<T>* ret = new MyVector<T>(getSize());
+  MyVector<T> ret(getSize());
   for(int i=0;i<getSize();i++)
   {
-    ret->operator[](i)=operator()(row,i);
+    ret[i]=operator()(row,i);
   }
-  return *ret;
+  return ret;
 }
 
 template <class T>
@@ -148,13 +148,13 @@ bool SymmetricMatrix<T>::isDiagonallyDominant() const
 }
 
 template <class T>
-MyVector<T>& SymmetricMatrix<T>::operator*(const MyVector<T>& other) const
+MyVector<T> SymmetricMatrix<T>::operator*(const MyVector<T>& other) const
 {
-  MyVector<T>* ret = new MyVector<T>(getSize());
   if(getSize()!=other.getSize())
   {
     throw MyVectorSizeException();
   }
+  MyVector<T> ret(other.getSize());
   for(int i=0;i<getSize();i++)
   {
     T tmp=0;
@@ -162,9 +162,9 @@ MyVector<T>& SymmetricMatrix<T>::operator*(const MyVector<T>& other) const
     {
       tmp+=operator()(i,j)*other[j];
     }
-    ret->operator[](i)=tmp;
+    ret[i]=tmp;
   }
-  return *ret;
+  return ret;
 }
 
 template <class T>

@@ -67,14 +67,14 @@ class SymmetricMatrix: public MatrixBase<T>
      * \post Returns the row of the matrix at that location.
      * \return MyVector<T>.
      */
-    virtual MyVector<T>& operator[](const int& row);
+    virtual MyVector<T> operator[](const int& row);
 
     /*! Row getter.
      * \pre 'row' must be between 0 and m_size-1.
      * \post Returns the row of the matrix at that location.
      * \return MyVector<T>.
      */
-    virtual const MyVector<T>& operator[](const int& row) const;
+    virtual const MyVector<T> operator[](const int& row) const;
 
     /*! * operator.
      * \pre m_size must be the same as other's size.
@@ -109,7 +109,7 @@ class SymmetricMatrix: public MatrixBase<T>
      * \post Returns the output of the matrix multiplied by other.
      * \return MyVector<T>.
      */
-    virtual MyVector<T>& operator*(const MyVector<T>& other) const;
+    virtual MyVector<T> operator*(const MyVector<T>& other) const;
 
     /*! Symmetry Checker.
      * \pre None.

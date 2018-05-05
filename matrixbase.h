@@ -20,6 +20,13 @@ class MatrixBase
   protected:
     int m_size;
   public:
+    /*! Virtual Destructor.
+     * \pre None.
+     * \post Deletes the matrix.
+     * \return None.
+     */
+    virtual ~MatrixBase(){}
+
     /*! Size getter.
      * \pre None.
      * \post Returns the size of the matrix.
@@ -59,27 +66,27 @@ class MatrixBase
      * \post Returns the row of the matrix at that location.
      * \return MyVector<T>.
      */
-    virtual MyVector<T>& operator[](const int& row) = 0;
+    virtual MyVector<T> operator[](const int& row) = 0;
 
     /*! Row getter.
      * \pre 'row' must be between 0 and m_size-1.
      * \post Returns the row of the matrix at that location.
      * \return MyVector<T>.
      */
-    virtual const MyVector<T>& operator[](const int& row) const = 0;
+    virtual const MyVector<T> operator[](const int& row) const = 0;
 
     /*! * operator.
      * \pre m_size must be the same as other's size.
      * \post Returns the output of the matrix multiplied by other.
      * \return MyVector<T>.
      */
-    virtual MyVector<T>& operator*(const MyVector<T>& other) const
+    virtual MyVector<T> operator*(const MyVector<T>& other) const
     {
-      MyVector<T>* ret = new MyVector<T>(getSize());
       if(getSize()!=other.getSize())
       {
         throw MyVectorSizeException();
       }
+      MyVector<T> ret(other.getSize());
       for(int i=0;i<getSize();i++)
       {
         T tmp=0;
@@ -87,9 +94,9 @@ class MatrixBase
         {
           tmp+=operator()(i,j)*other[j];
         }
-        ret->operator[](i)=tmp;
+        ret[i]=tmp;
       }
-      return *ret;
+      return ret;
     }
 
     /*! * operator.
