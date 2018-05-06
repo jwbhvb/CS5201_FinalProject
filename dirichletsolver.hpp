@@ -16,6 +16,8 @@ DirichletSolver<T_returnType,T_functionPtr>::DirichletSolver(const int& n, const
 {
   m_numDivisions=n;
   m_func=f;
+  m_solverGaussSeidel=NULL;
+  m_solverSteepestDescent=NULL;
   createMatrix();
   createVector();
 }

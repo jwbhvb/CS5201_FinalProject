@@ -23,7 +23,7 @@ class MyFunction
      * \post Creates a MyFunction object.
      * \return None.
      */
-    MyFunction() {}
+    MyFunction() {m_func=nullptr;}
 
     /*! Constructor.
      * \pre None.
