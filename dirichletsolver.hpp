@@ -38,35 +38,21 @@ MyVector<T_returnType> DirichletSolver<T_returnType,T_functionPtr>::computeSteep
 template <class T_returnType, class T_functionPtr>
 void DirichletSolver<T_returnType,T_functionPtr>::createMatrix()
 {
-  m_matrix=new SymmetricMatrix<T_returnType>((m_numDivisions-1)*(m_numDivisions-1));
-  double h = 1.0/m_numDivisions;
-  double x = 0;
-  double y = 0;
-  bool r, t;
-
-  for (int i=0; i<m_matrix->getSize(); i++)
+  int size = (m_numDivisions-1) * (m_numDivisions-1);
+  m_matrix=new SymmetricMatrix<T_returnType>(size);
+  
+  for (int i=0; i < size; i++)
   {
-    x += h;
-
-    if (!(i%(m_numDivisions-1)))
+    m_matrix->operator()(i,i) = 1;
+    if (i < size-1 && (i+1)%(m_numDivisions-1) != 0)
     {
-      y += h;
-      x = h;
+      m_matrix->operator()(i+1,i) = -0.25;
+      m_matrix->operator()(i,i+1) = -0.25;
     }
-    
-    r = (m_numDivisions-2 != i%(m_numDivisions-1));
-    t = (i != m_matrix->getSize() - 1);
-
-    for (int j=i; j<m_matrix->getSize(); j++)
+    if (i < size-(m_numDivisions-1))
     {
-      if (j == (i+(m_numDivisions-1)) && t)
-        m_matrix->operator()(i,j)=-h;
-      else if (j == (i+1) && r)
-        m_matrix->operator()(i,j) = -h;
-      else if (i == j)
-        m_matrix->operator()(i,j) = 1;
-      else
-        m_matrix->operator()(i,j) = 0;
+      m_matrix->operator()(i+(m_numDivisions-1),i) = -0.25;
+      m_matrix->operator()(i,i+(m_numDivisions-1)) = -0.25;
     }
   }
   return;
@@ -95,13 +81,14 @@ void DirichletSolver<T_returnType,T_functionPtr>::createVector()
     t=(y==1-h);
     m_vector[i]=0;
     if(l)
-      m_vector[i]+=h*m_func(x-h,y);
+      m_vector[i]+=m_func(x-h,y);
     if(b)
-      m_vector[i]+=h*m_func(x,y-h);
+      m_vector[i]+=m_func(x,y-h);
     if(r)
-      m_vector[i]+=h*m_func(x+h,y);
+      m_vector[i]+=m_func(x+h,y);
     if(t)
-      m_vector[i]+=h*m_func(x,y+h);
+      m_vector[i]+=m_func(x,y+h);
   }
+  m_vector = m_vector * 0.25;
   return;
 }
