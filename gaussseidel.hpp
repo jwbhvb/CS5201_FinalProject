@@ -34,13 +34,18 @@ MyVector<T> GaussSeidel<T>::operator()(const MatrixBase<T>& m, const MyVector<T>
     oldX=x;
     for(int i=0;i<m.getSize();i++)
     {
-      y[i]=v[i]/(m[i][i]);
+      T sum = 0;
       for(int j=0;j<m.getSize();j++)
       {
-        if(j==i)
-          continue;
-        y[i]-=((m[i][j]/m[i][i])*x[j]);
-        x[i]=y[i];
+        if(j<i)
+        {
+          sum += -m(i,j)*x[j];
+        }
+        else if (j > i)
+        {
+          sum += -m(i,j)*oldX[j];
+        }
+        x[i] = (sum+v[i])/m(i,i);
       }
     }
   }while((oldX-x).dotProduct(oldX-x)>pow(.1,20)&&m_iterations<10000);
