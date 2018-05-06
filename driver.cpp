@@ -38,8 +38,6 @@ int main(int argc, char *argv[])
     MyFunction<double,funcPtr> boundaryFunc(&func1);
     DirichletSolver<double,funcPtr> solver(numDivisions,boundaryFunc);
 
-    
-
     /*------------------------------Gauss Seidel------------------------------*/
     my_clock=clock();
     MyVector<double> solutionGaussSeidel = solver.computeGaussSeidel();
@@ -73,9 +71,6 @@ int main(int argc, char *argv[])
     cout<<"\nNumber of Iterations: "<<solver.getSteepestDescentSolver().getCount();
     cout<<"\nTime took: "<<(1000*my_clock2)/CLOCKS_PER_SEC<<" ms."<<endl;
     /*--------------------------End Steepest Descent--------------------------*/
-
-
-
   }
   catch(MyVectorIndexException e)
   {

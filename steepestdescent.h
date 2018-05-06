@@ -18,6 +18,7 @@ using namespace std;
 template <class T>
 class SteepestDescent
 {
+  const int DIGITS_OF_ERROR_TOLERANCE = 20; 
   private:
     int m_iterations;
   public:

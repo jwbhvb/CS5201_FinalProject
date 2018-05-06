@@ -48,6 +48,6 @@ MyVector<T> GaussSeidel<T>::operator()(const MatrixBase<T>& m, const MyVector<T>
         x[i] = (sum+v[i])/m(i,i);
       }
     }
-  }while((oldX-x).dotProduct(oldX-x)>pow(.1,20)&&m_iterations<10000);
+  }while((oldX-x).dotProduct(oldX-x)>pow(.1,DIGITS_OF_ERROR_TOLERANCE)&&m_iterations<10000);
   return x;
 }
